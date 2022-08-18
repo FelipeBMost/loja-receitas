@@ -13,6 +13,8 @@ export default function Receita ({ receitas}) {
   const [valorTotal, setValorTotal] = useState(0)
   const [contatoDiferente, setContatoDiferente] = useState(false)
   const [dadosValidados, setDadosValidados] = useState(false)
+  const [validando, setValidando] = useState(false)
+  const [codigo, setCodigo] = useState('')
 
   const proximaReceita = () => {
     if(index !== receita.length - 1 && carrinhoAberto) {
@@ -74,7 +76,8 @@ export default function Receita ({ receitas}) {
    setContatoDiferente(false)
    setDadosValidados(false)
    if(e.target.contato.value === e.target.confirmarContato.value){
-     axios.post('https://sheetdb.io/api/v1/58f61be4dda40', { 
+      setValidando(true)
+      axios.post('https://sheetdb.io/api/v1/58f61be4dda40', { 
         'data': { 
         'id': 'INCREMENT',
         'name': e.target.contato.value,
@@ -82,10 +85,19 @@ export default function Receita ({ receitas}) {
         'age': '80',
         }
         
-      }).then(response => {
+      }).then(() => {
         setDadosValidados(true)
-      }).catch(error => {
-        alert('Favor tentar novamente')
+        setValidando(false)
+        const codigo = '00020126360014BR.GOV.BCB.PIX0114+5551993392378520400005303986540'+ valorTotal.length + valorTotal + '5802BR5925Felipe Bolzan Mostardeiro6009SAO PAULO61080540900062070503***6304'
+        let crc = crc16ccitt(codigo).toString(16).toUpperCase();
+        if (crc.length === 3) {
+        crc = '0'+ crc
+        }
+        const codigoFinal = codigo + crc
+        setCodigo(codigoFinal)
+      }).catch(() => {
+        alert('Favor, tentar novamente')
+        setValidando(false)
       });
    } else {
      setDadosValidados(false)
@@ -93,34 +105,10 @@ export default function Receita ({ receitas}) {
    }
  }
 
-  const copiarCodigo = () => {
-      const codigo = '00020126360014BR.GOV.BCB.PIX0114+5551993392378520400005303986540'+ valorTotal.length + valorTotal + '5802BR5925Felipe Bolzan Mostardeiro6009SAO PAULO61080540900062070503***6304'
-      let crc = crc16ccitt(codigo).toString(16).toUpperCase();
-      if (crc.length === 3) {
-      crc = '0'+ crc
-      }
-      const codigoFinal = codigo + crc
-      const clipboardItem = new ClipboardItem({
-        'text/plain': someAsyncMethod().then((result) => {
-    
-        /**
-         * We have to return an empty string to the clipboard if something bad happens, otherwise the
-         * return type for the ClipBoardItem is incorrect.
-         */
-        if (!result) {
-            return new Promise(async (resolve) => {
-                resolve(new Blob[``]())
-            })
-        }
-    
-        const copyText = codigoFinal
-            return new Promise(async (resolve) => {
-                resolve(new Blob([copyText]))
-            })
-        }),
+  const copiarCodigo = () => { 
+      navigator.clipboard.writeText(codigo).then(() => {
+        alert('Copiado para a Área de Transferência')
       })
-      // Now, we can write to the clipboard in Safari
-      navigator.clipboard.write([clipboardItem])
   }
 
   return (
@@ -243,7 +231,7 @@ export default function Receita ({ receitas}) {
             <label htmlFor='confirmarContato'>Confirmar Email / Whatsapp: 
               <input required type='text' id='confirmarContato' name='confirmarContato'></input>
             </label>
-            <button>Validar contato</button>
+            <button>{validando ? 'Validando...' : 'Validar contato'}</button>
             {contatoDiferente && 
             <div>
               <span>Contatos diferentes</span>
@@ -251,6 +239,7 @@ export default function Receita ({ receitas}) {
           </form>
           {dadosValidados && 
           <div className={styles.containerPix}>
+            <input type='text' value={codigo}></input>
             <p>Toque no botão para copiar o código Pix.</p>
             <button onPointerDown={copiarCodigo}>Copiar código Pix</button>
           </div>}
