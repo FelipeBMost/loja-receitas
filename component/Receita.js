@@ -104,7 +104,11 @@ export default function Receita ({ receitas}) {
       crc = '0'+ crc
       }
       const codigoFinal = codigo + crc
-      navigator.clipboard.writeText(codigoFinal);          
+      navigator.clipboard.writeText(codigoFinal).then(() => {
+        ''
+      }), () => {
+        ''
+      };          
   }
 
   return (
