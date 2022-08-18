@@ -14,8 +14,8 @@ export default function Home() {
 const receitas = [
   {
     titulo: 'Ursinho Kuma',
-    imagem: `url(/kuma.jpeg)`,
-    src: './kuma.jpeg',
+    imagem: `url(/Kuma.jpeg)`,
+    src: './Kuma.jpeg',
     texto: {quantidade: 500, tamanho: 10, valor: 15}
   },
   {
