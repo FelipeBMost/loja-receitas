@@ -105,10 +105,9 @@ export default function Receita ({ receitas}) {
    }
  }
 
-  const copiarCodigo = () => { 
-      navigator.clipboard.writeText(codigo).then(() => {
-        alert('Copiado para a Área de Transferência')
-      })
+  const copiarCodigo = (event) => {
+      event.target.select();
+      document.execCommand('copy')
   }
 
   return (
@@ -239,9 +238,8 @@ export default function Receita ({ receitas}) {
           </form>
           {dadosValidados && 
           <div className={styles.containerPix}>
-            <input type='text' value={codigo}></input>
-            <p>Toque no botão para copiar o código Pix.</p>
-            <button onPointerDown={copiarCodigo}>Copiar código Pix</button>
+          <p>Toque para copiar o código Pix.</p>
+          <textarea type='text' value={codigo} readOnly rows='4' cols='40' onPointerDown={copiarCodigo}></textarea>
           </div>}
           
         </div>
