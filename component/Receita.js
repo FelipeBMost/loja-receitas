@@ -105,10 +105,9 @@ export default function Receita ({ receitas}) {
       }
       const codigoFinal = codigo + crc
       navigator.clipboard.writeText(codigoFinal).then(() => {
-        ''
-      }), () => {
-        ''
-      };          
+        alert('Copiado para a Área de Transferência')
+      }) 
+
   }
 
   return (
