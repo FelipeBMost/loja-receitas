@@ -1,0 +1,15 @@
+#nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: rgba(250, 181, 125, 0.63);
+}
+
+#logo {
+  width: 150px;
+}
+
+#tituloNav {
+  display: none;
+}

@@ -1,5 +1,5 @@
 {
-  "name": "site-paula",
+  "name": "site-paula-back",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,12 +9,25 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "crc": "^4.1.1",
+    "express": "^4.18.1",
     "next": "12.2.3",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "sheetdb-js": "^1.0.3"
   },
   "devDependencies": {
     "eslint": "8.21.0",
     "eslint-config-next": "12.2.3"
-  }
+  },
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "main": "next.config.js",
+  "keywords": [
+    "artesanato",
+    "receitas",
+    "crochê"
+  ],
+  "author": "Felipe",
+  "license": "ISC"
 }
