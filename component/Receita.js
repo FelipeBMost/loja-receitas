@@ -69,10 +69,6 @@ export default function Receita ({ receitas}) {
     setDadosValidados(false)
   }
 
-  
-    
-  
-
  const validarDados = (e) => {
    e.preventDefault();
    setContatoDiferente(false)
@@ -97,6 +93,28 @@ export default function Receita ({ receitas}) {
    }
  }
 
+ // const clipboardItem = new ClipboardItem({
+ //   'text/plain': someAsyncMethod().then((result) => {
+//
+ //   /**
+ //    * We have to return an empty string to the clipboard if something bad happens, otherwise the
+ //    * return type for the ClipBoardItem is incorrect.
+ //    */
+ //   if (!result) {
+ //       return new Promise(async (resolve) => {
+ //           resolve(new Blob[``]())
+ //       })
+ //   }
+//
+ //   const copyText = `some string`
+ //       return new Promise(async (resolve) => {
+ //           resolve(new Blob([copyText]))
+ //       })
+ //   }),
+ // })
+ // // Now, we can write to the clipboard in Safari
+ // navigator.clipboard.write([clipboardItem])
+
   const copiarCodigo = () => {
       const codigo = '00020126360014BR.GOV.BCB.PIX0114+5551993392378520400005303986540'+ valorTotal.length + valorTotal + '5802BR5925Felipe Bolzan Mostardeiro6009SAO PAULO61080540900062070503***6304'
       let crc = crc16ccitt(codigo).toString(16).toUpperCase();
@@ -104,10 +122,9 @@ export default function Receita ({ receitas}) {
       crc = '0'+ crc
       }
       const codigoFinal = codigo + crc
-      navigator.clipboard.writeText(codigoFinal).then(() => {
+      navigator.clipboard.write(codigoFinal).then(() => {
         alert('Copiado para a Área de Transferência')
-      }) 
-
+      })
   }
 
   return (
