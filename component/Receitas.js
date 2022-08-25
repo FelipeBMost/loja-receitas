@@ -15,7 +15,6 @@ export default function Receita ({ receitas}) {
   const [dadosValidados, setDadosValidados] = useState(false)
   const [validando, setValidando] = useState(false)
   const [codigo, setCodigo] = useState('')
-
   const proximaReceita = () => {
     if(index !== receita.length - 1 && carrinhoAberto) {
       setCarrinhoAberto(false)
@@ -127,6 +126,7 @@ export default function Receita ({ receitas}) {
         }
       } catch (e) {
         console.error('e', e)
+        event.target.value.select();
       }
   }
 
