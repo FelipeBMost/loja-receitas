@@ -49,7 +49,7 @@ export default function Receita ({ receitas}) {
   }
 
   const removerDoCarrinho = (el) =>{
-    noCarrinho.splice(noCarrinho.indexOf(el), 1)
+    noCarrinho.splice(el, 1)
     setContagem(contagem - 1)
   }
     
@@ -118,6 +118,7 @@ export default function Receita ({ receitas}) {
  }
 
   const copiarCodigo = async (event) => {
+    event.preventDefault();
       try {
         if(navigator?.clipboard?.writeText) {
           await navigator.clipboard.writeText(event.target.value)
@@ -172,10 +173,10 @@ export default function Receita ({ receitas}) {
           )
         }
       </div>
-      <div className={styles.sacola}>
+      <div className={styles.sacola} onPointerDown={abrirFecharCarrinho}>
         { noCarrinho.length >= 0
         ? (
-          <button onPointerDown={abrirFecharCarrinho}>
+          <button>
           <span id={styles.contagemItens}>{contagem}</span>
           </button>
         )
@@ -197,7 +198,7 @@ export default function Receita ({ receitas}) {
                 <h3>{receita[el].titulo}</h3>
                 <p>R$ {receita[el].texto.valor},00</p>
               </div>
-              <button className={styles.botaoRemover} onPointerDown={removerDoCarrinho}></button>
+              <button className={styles.botaoRemover} onPointerDown={(key) => {removerDoCarrinho(key)}}></button>
             </div>
             )}
             {contagem === 0 && <h3 className={styles.mensagemCarrinho}>Carrinho Vazio</h3>}

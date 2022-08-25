@@ -41,11 +41,10 @@
 .containerBotoes {
   display: flex;
   justify-content: space-between;
-  position: fixed;
-  bottom: 0;
   width: 360px;
   height: 64px;
   padding: 9px 9px 16px 16px;
+  margin-top: 20px;
   background-repeat: no-repeat;
 }
 
