@@ -1,0 +1,212 @@
+.receitaAtual {
+  width: 300px;
+  height: 315px;
+  text-align: center;
+  background-position: center;
+  background-size: cover;
+  margin: 10px auto;
+}
+
+.tituloReceita {
+  position: absolute;
+  z-index: -10;
+}
+
+.descricaoReceita {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 1rem;
+  width: 310px;
+  height: 160px;
+  padding: 10px 20px;
+  border-radius: 20px;
+}
+
+  .materiais {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    align-self: center;
+    margin-top: 10px;
+    border-radius: 20px;
+    width: 140px;
+    height: 30px;
+
+  }
+
+/*---------------------------BOTÕES---------------------------*/
+
+.containerBotoes {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  width: 360px;
+  height: 64px;
+  padding: 9px 9px 16px 16px;
+  background-repeat: no-repeat;
+}
+
+.botaoAdicionar, .botaoRemover, 
+.flechaEsquerda, .flechaEsquerdaCinza, 
+.flechaDireita, .flechaDireitaCinza, 
+.sacola {
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+}
+  .botaoAdicionar {
+    background-image: url('/sacolaMais.svg');
+  }
+
+  .botaoRemover {
+    background-image: url('/sacolaMenos.svg');
+  }
+
+.containerFlechas {
+  display: flex;
+  justify-content: space-around;
+  width: 160px;
+  height: 100%;
+}
+
+  .flechaEsquerda {
+    background-image: url('/flechaEsquerda.svg');
+  }
+
+  .flechaEsquerdaCinza {
+    background-image: url('/flechaEsquerdaCinza.svg');
+  }
+
+  .flechaDireita {
+    background-image: url('/flechaDireita.svg');
+  }
+
+  .flechaDireitaCinza {
+    background-image: url('/flechaDireitaCinza.svg');
+  }
+
+.sacola {
+  position: relative;
+  background-image: url('/sacola.svg');
+}
+
+#contagemItens {
+  position: absolute;
+  bottom: -9px;
+  left: 18px;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(247, 108, 15, 0.568);
+  color: rgb(247, 107, 15);
+  z-index: 3;
+}
+
+/*---------------------------CARRINHO---------------------------*/
+
+.containerCarrinho {
+  position: absolute;
+  top: 74px;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 74px);
+  background-color: #F7F7F7;
+  padding: 10px 0 64px;
+}
+
+.carrinho {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #FFFFE6;
+  width: 100vw;
+  height: 100%;
+  z-index: 10;
+  border-radius: 40px;
+}
+
+.mensagemCarrinho {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.itemCarrinho {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 15px;
+  background-color: #FFF1D3;
+  z-index: 12;
+}
+
+.itemCarrinho:first-child {
+  border-radius: 40px 40px 0 0;
+}
+
+.itemCarrinho + .itemCarrinho {
+  border-top: 1px solid #E2D55A;
+}
+
+.botoesCarrinho {
+  width: 100%;
+  display: flex;
+  padding: 10px;
+  background-color: #FFF1D3;
+  border-radius: 0 0 40px 40px;
+}
+
+.botoesCarrinho button {
+  width: 100%;
+  padding: 10px;
+}
+
+.botoesCarrinho button + button {
+  border-left: 3px solid #E2D55A;
+}
+
+/*-------------------------FORMULÁRIO PIX-------------------------*/
+
+#formulario {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+  gap: 20px
+}
+
+#formulario input {
+  width: 80%;
+  height: 30px;
+  font-size: 1rem;
+  padding: 10px;
+  border: none;
+  background-color: #FFF1D3;
+  margin-top: 10px;
+  box-shadow: 3px 1px 4px rgba(0, 0, 0, 0.267);
+}
+
+#formulario button {
+  margin: 10px auto;
+  padding: 10px;
+  background-color: #FFF1D3;
+  border-radius: 20px;
+  border: 1px solid #E2D55A;
+  box-shadow: 3px 1px 4px #e2d45a;
+}
+
+#formulario span {
+  color: red;
+  font-weight: 900;
+  position: absolute;
+  top: 270px;
+  left: 100px;
+}
+
+.containerPix p {
+  font-weight: 700;
+}

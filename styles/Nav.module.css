@@ -1,15 +1,22 @@
 #nav {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 10px;
-  background-color: rgba(250, 181, 125, 0.63);
+  justify-content: space-between;
+  gap: 60px;
+  height: 64px;
 }
 
 #logo {
   width: 150px;
 }
 
-#tituloNav {
-  display: none;
+.containerIcones {
+  width: 90px;
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.icones {
+  width: 45px;
 }

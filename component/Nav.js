@@ -4,7 +4,10 @@ function nav() {
   return (
     <nav id={styles.nav}>
       <img id={styles.logo} src='/logo.png'/>
-      <h1 id={styles.tituloNav}>Ana Salerno Crochet Design</h1>
+      <div className={styles.containerIcones}>
+        <img className={styles.icones} src='./whatsapp.svg' href='#'></img>
+        <img className={styles.icones} src='./instagram.svg' href='#'></img>
+      </div>
     </nav>
   )
 }
