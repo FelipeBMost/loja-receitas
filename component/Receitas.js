@@ -48,7 +48,7 @@ export default function Receita ({ receitas}) {
   }
 
   const removerDoCarrinho = (el) =>{
-    noCarrinho.splice(el, 1)
+    noCarrinho.splice(noCarrinho.indexOf(el), 1)
     setContagem(contagem - 1)
   }
     
@@ -117,7 +117,6 @@ export default function Receita ({ receitas}) {
  }
 
   const copiarCodigo = async (event) => {
-    event.preventDefault();
       try {
         if(navigator?.clipboard?.writeText) {
           await navigator.clipboard.writeText(event.target.value)
@@ -126,7 +125,6 @@ export default function Receita ({ receitas}) {
         }
       } catch (e) {
         console.error('e', e)
-        event.target.value.select();
       }
   }
 
@@ -198,7 +196,7 @@ export default function Receita ({ receitas}) {
                 <h3>{receita[el].titulo}</h3>
                 <p>R$ {receita[el].texto.valor},00</p>
               </div>
-              <button className={styles.botaoRemover} onPointerDown={(key) => {removerDoCarrinho(key)}}></button>
+              <button className={styles.botaoRemover} onPointerDown={() => removerDoCarrinho(el)}></button>
             </div>
             )}
             {contagem === 0 && <h3 className={styles.mensagemCarrinho}>Carrinho Vazio</h3>}
@@ -224,7 +222,7 @@ export default function Receita ({ receitas}) {
       <div className={styles.carrinho}>
         <div>
           <form id={styles.formulario} onSubmit={(e) => {validarDados(e)}}>
-            <p>Informe um email ou whatsapp para receber a(s) receita(s) no formato PDF em até 12h após confirmação do pagamento. Caso não receba, entre em contato.</p>
+            <p>Informe um email ou whatsapp para receber a(s) receita(s) no formato PDF em até 12h após confirmação do pagamento. Caso não receba, entre em contato comigo.</p>
             <label htmlFor='contato'>Email / Whatsapp (DDD + Número): 
               <input required type='text' id='contato' name='contato' maxLength='35'></input>
             </label>
