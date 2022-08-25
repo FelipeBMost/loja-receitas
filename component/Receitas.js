@@ -181,7 +181,7 @@ export default function Receita ({ receitas}) {
           </button>
         )
         : (
-        <button id={styles.sacola}>
+        <button>
         </button>)
         }
       </div>
