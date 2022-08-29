@@ -116,16 +116,12 @@ export default function Receita ({ receitas}) {
    }
  }
 
-  const copiarCodigo = async (event) => {
-      try {
-        if(navigator?.clipboard?.writeText) {
-          await navigator.clipboard.writeText(event.target.value)
+  async function copiarCodigo(event) {
+        if('clipboard' in navigator) {
+          return await navigator.clipboard.writeText(event.target.value)
         } else {
-          event.target.value.select();
+          return document.execCommand('copy', true, event.target.value)
         }
-      } catch (e) {
-        console.error('e', e)
-      }
   }
 
   return (
@@ -222,7 +218,7 @@ export default function Receita ({ receitas}) {
       <div className={styles.carrinho}>
         <div>
           <form id={styles.formulario} onSubmit={(e) => {validarDados(e)}}>
-            <p>Informe um email ou whatsapp para receber a(s) receita(s) no formato PDF em até 12h após confirmação do pagamento. Caso não receba, entre em contato comigo.</p>
+            <p>Após confirmação do pagamento, tu receberás a(s) receita(s) no formato PDF em até 12h. Caso não recebas, entre em contato comigo.</p>
             <label htmlFor='contato'>Email / Whatsapp (DDD + Número): 
               <input required type='text' id='contato' name='contato' maxLength='35'></input>
             </label>
