@@ -15,6 +15,16 @@ export default function Receita ({ receitas}) {
   const [dadosValidados, setDadosValidados] = useState(false)
   const [validando, setValidando] = useState(false)
   const [codigo, setCodigo] = useState('')
+  const [materiais, setMateriais] = useState(false)
+
+  const toggleMateriais = () => {
+    if(!materiais) {
+      setMateriais(true)
+    } else {
+      setMateriais(false)
+    }
+  }
+
   const proximaReceita = () => {
     if(index !== receita.length - 1 && carrinhoAberto) {
       setCarrinhoAberto(false)
@@ -127,59 +137,71 @@ export default function Receita ({ receitas}) {
   return (
     <>
 {/*------------------- PÁGINA PRINCIPAL / RECEITA ---------------- */}
-
+{!carrinhoAberto &&
+<>
     <div className={styles.receitaAtual} style={{backgroundImage: receita[index].imagem}}>
       <h1 className={styles.tituloReceita}>{receita[index].titulo}</h1>
     </div>
+    <div className={styles.containerBotoes}>
+        { index !== 0 
+          ? <button className={styles.botao} style={{backgroundColor: receita[index].cor}} onPointerDown={receitaAnterior}>
+              <img src='./flechaEsquerda.svg' width={25} height={25} />
+              <p>Anterior</p>
+            </button>
+          : <div className={styles.botao}>
+              <button className={styles.botaoEscondido} disabled >
+              </button>
+            </div>
+        }
+        { index < receita.length - 1
+          ? <button className={styles.botao} style={{backgroundColor: receita[index].cor}} onPointerDown={proximaReceita}>
+              <p>Próxima</p>
+              <img src='./flechaDireita.svg' width={25} height={25} />
+            </button>
+          : (
+            <button className={styles.botao} disabled>
+            </button>
+          )
+        }
+      </div>
     <div className={styles.descricaoReceita} style={{backgroundImage: receita[index].corLinear}}>
-      <p>Qt. de linha: {receita[index].texto.quantidade}m</p>
+      { materiais
+      ? <><ul className="listaMateriais">
+      <li>{receita[index].lista[0]}</li>
+      <li>{receita[index].lista[1]}</li>
+      <li>{receita[index].lista[2]}</li>
+      <li>{receita[index].lista[3]}</li>
+      <li>{receita[index].lista[4]}</li>
+    </ul>
+    </>
+      : <><p>Qt. de linha: {receita[index].texto.quantidade}m</p>
       <p>Tamanho: {receita[index].texto.tamanho}cm</p>
       <p>Valor: R${receita[index].texto.valor},00</p>
-      <div className={styles.materiais} style={{backgroundColor: receita[index].cor}}>Materiais</div>
+      </>
+      }
+      {materiais
+      ? <div className={styles.botaoMateriais} style={{backgroundColor: receita[index].cor}} onClick={toggleMateriais}>Voltar</div>
+      : <div className={styles.botaoMateriais} style={{backgroundColor: receita[index].cor}} onClick={toggleMateriais}>Materiais</div>
+      }
     </div>
 
 {/*--------------------------- BOTÕES ------------------------ */}
-    <div className={styles.containerBotoes} style={{backgroundImage: receita[index].fundo}}>
+    <div className={styles.containerBotoes}>
         { noCarrinho.indexOf(index) === -1
-        ? <button className={styles.botaoAdicionar} onPointerDown={mudarCarrinho}></button>
-        : <button className={styles.botaoRemover} onPointerDown={mudarCarrinho}></button>
+        ? <button className={styles.botaoAdicionar} onPointerDown={mudarCarrinho}>
+          <p>Adicionar ao carrinho</p>
+        </button>
+        : <button className={styles.botaoRemover} onPointerDown={mudarCarrinho}>
+          <p>Remover do carrinho</p>
+        </button>
         }
-      
-      <div className={styles.containerFlechas}>
-        { index !== 0 
-          ? (
-            <button className={styles.flechaEsquerda}  onPointerDown={receitaAnterior}>
-            </button>
-          )
-          : (
-            <button className={styles.flechaEsquerdaCinza} disabled >
-            </button>
-          )
-        }
-        { index < receita.length - 1
-          ? (
-            <button className={styles.flechaDireita} onPointerDown={proximaReceita}>
-            </button>
-          )
-          : (
-            <button className={styles.flechaDireitaCinza} disabled>
-            </button>
-          )
-        }
-      </div>
-      <div className={styles.sacola} onPointerDown={abrirFecharCarrinho}>
-        { noCarrinho.length >= 0
-        ? (
-          <button>
-          <span id={styles.contagemItens}>{contagem}</span>
+          <button className={styles.botaoCarrinho} onPointerDown={abrirFecharCarrinho}>
+            <p>Ver carrinho</p>
+            <span id={styles.contagemItens}>{contagem}</span>
           </button>
-        )
-        : (
-        <button>
-        </button>)
-        }
-      </div>
     </div> 
+    </>
+    }
     {/*------------------FIM CONTAINER BOTÕES--------------------*/}
       
     {carrinhoAberto && (
@@ -203,7 +225,7 @@ export default function Receita ({ receitas}) {
             </button>
             {contagem > 0  &&
             <button onPointerDown={finalizarCompra}>
-              Finalizar
+              Pagar
             </button>
             }
           </div>
@@ -218,14 +240,13 @@ export default function Receita ({ receitas}) {
       <div className={styles.carrinho}>
         <div>
           <form id={styles.formulario} onSubmit={(e) => {validarDados(e)}}>
-            <p>Após confirmação do pagamento, tu receberás a(s) receita(s) no formato PDF em até 12h. Caso não recebas, entre em contato comigo.</p>
-            <label htmlFor='contato'>Email / Whatsapp (DDD + Número): 
+            <label htmlFor='contato'>Email / Whatsapp (DDD + Número) <br />para receber as receitas: 
               <input required type='text' id='contato' name='contato' maxLength='35'></input>
             </label>
-            <label htmlFor='confirmarContato'>Confirmar Email / Whatsapp: 
+            <label htmlFor='confirmarContato'>Digite novamente:
               <input required type='text' id='confirmarContato' name='confirmarContato' maxLength='35'></input>
             </label>
-            <button>{validando ? 'Validando...' : 'Validar contato'}</button>
+            <button>{validando ? 'Validando...' : 'Receber código Pix'}</button>
             {contatoDiferente && 
             <div>
               <span>Contatos diferentes</span>
@@ -234,6 +255,9 @@ export default function Receita ({ receitas}) {
           <div>
             <p>Toque para copiar o código Pix.</p>
             <textarea type='text' value={codigo} readOnly rows='4' cols='35' onPointerDown={copiarCodigo}></textarea>
+            <p>Após confirmação do pagamento, receberás a(s) receita(s) no formato PDF em até 12h. 
+              <br />Caso não receba, entre em contato comigo no whats ou insta.
+            </p>
           </div>}
           </form>
           

@@ -5,7 +5,10 @@ function nav() {
     <nav id={styles.nav}>
       <img id={styles.logo} src='/logo.png'/>
       <div className={styles.containerIcones}>
-        <img className={styles.icones} src='./whatsapp.svg' href='#'></img>
+        <button href='https://wa.me/5551997997137'>
+          <img className={styles.icones} src='./whatsapp.svg'></img>
+        </button>
+        
         <img className={styles.icones} src='./instagram.svg' href='#'></img>
       </div>
     </nav>

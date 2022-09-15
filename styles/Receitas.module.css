@@ -1,6 +1,6 @@
 .receitaAtual {
-  width: 300px;
-  height: 315px;
+  width: 280px;
+  height: 295px;
   text-align: center;
   background-position: center;
   background-size: cover;
@@ -12,6 +12,18 @@
   z-index: -10;
 }
 
+.botao{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 130px;
+  height: 40px;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
 .descricaoReceita {
   display: flex;
   flex-direction: column;
@@ -21,82 +33,50 @@
   height: 160px;
   padding: 10px 20px;
   border-radius: 20px;
+  margin: 10px auto;
 }
 
-  .materiais {
+  .botaoMateriais {
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: 500;
     align-self: center;
-    margin-top: 10px;
-    border-radius: 20px;
+    border-radius: 10px;
     width: 140px;
     height: 30px;
-
   }
 
 /*---------------------------BOTÕES---------------------------*/
 
 .containerBotoes {
   display: flex;
-  justify-content: space-between;
-  width: 360px;
-  height: 64px;
-  padding: 9px 9px 16px 16px;
-  margin-top: 20px;
-  background-repeat: no-repeat;
-}
-
-.botaoAdicionar, .botaoRemover, 
-.flechaEsquerda, .flechaEsquerdaCinza, 
-.flechaDireita, .flechaDireitaCinza, 
-.sacola {
-  background-size: 100%;
-  background-repeat: no-repeat;
-  width: 40px;
-  height: 40px;
-}
-  .botaoAdicionar {
-    background-image: url('/sacolaMais.svg');
-  }
-
-  .botaoRemover {
-    background-image: url('/sacolaMenos.svg');
-  }
-
-.containerFlechas {
-  display: flex;
   justify-content: space-around;
-  width: 160px;
-  height: 100%;
+  width: 360px;
+  height: 50px;
 }
 
-  .flechaEsquerda {
-    background-image: url('/flechaEsquerda.svg');
-  }
+.botaoAdicionar, .botaoRemover, .botaoCarrinho {
+  width: 120px;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 5px;
+  border-radius: 10px;
+}
 
-  .flechaEsquerdaCinza {
-    background-image: url('/flechaEsquerdaCinza.svg');
-  }
+.botaoAdicionar {
+  background-color: #9EE59D;
+}
 
-  .flechaDireita {
-    background-image: url('/flechaDireita.svg');
-  }
+.botaoRemover {
+  background-color: #e25a5a;
+}
 
-  .flechaDireitaCinza {
-    background-image: url('/flechaDireitaCinza.svg');
-  }
-
-.sacola {
-  position: relative;
-  background-image: url('/sacola.svg');
+.botaoCarrinho {
+  background-color: #EAED56;
 }
 
 #contagemItens {
-  position: absolute;
-  bottom: -9px;
-  left: 18px;
   transform: translate(-50%, -50%);
   font-size: 1.2rem;
   font-weight: 700;
@@ -109,9 +89,8 @@
 .containerCarrinho {
   position: absolute;
   top: 74px;
-  left: 0;
   width: 365px;
-  height: calc(640px - 54px);
+  height: calc(640px);
   background-color: #F7F7F7;
   padding: 30px 0 0;
 }
@@ -183,7 +162,7 @@
   font-size: 1rem;
   padding: 10px;
   border: none;
-  background-color: #FFF1D3;
+  background-color: #ffffff;
   margin-top: 10px;
   box-shadow: 3px 1px 4px rgba(0, 0, 0, 0.267);
 }
@@ -192,6 +171,7 @@
 #formulario input:-webkit-autofill:hover,
 #formulario input:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0px 1000px #FFF1D3 inset;
+  box-shadow: 0 0 0px 1000px #FFF1D3 inset;
 }
 
 #formulario button {
@@ -211,6 +191,17 @@
   left: 100px;
 }
 
+#formulario label {
+  font-size: 1.2rem;
+}
+
 .containerPix p {
   font-weight: 700;
+}
+
+@media (min-height:650px) {
+  .containerBotoes {
+    position: fixed;
+    bottom: 0;
+  }
 }
